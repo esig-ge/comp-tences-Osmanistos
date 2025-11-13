@@ -15,8 +15,12 @@
     </article>
 
     <article>
-        {% if  %}
-
+        {% if reviews  %}
+            {% for r in reviews %}
+                <p>{{ r.user_mail }}</p>
+                <p>{{ r.review }}</p>
+                <p>{{ r.publish_date }}</p>
+            {% endfor %}
         {% endif  %}
     </article>
 
