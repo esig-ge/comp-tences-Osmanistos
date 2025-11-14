@@ -27,7 +27,10 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    user_mail = models.EmailField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user_mail = models.EmailField()
     review = models.TextField()
     publish_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"avis {self.pk} pour {self.product}"
