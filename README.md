@@ -4,5 +4,11 @@ Un site qui regroupe divers article, avec des commentaire pouvant etre laisser p
 Le crud est realiser sur la table de reviews
 
 
+RESSOURCE :
+Tout les détailles produits present sur ce site ont été récuperer depuis Digitec.ch et Galaxus.ch
+
+
+
+
 AIDE MEMOIRE :
 Forcer le remplacement du git sur pythonAnywhere : pa_autoconfigure_django.py --python=3.10 https://github.com/esig-ge/lien-github-cible --nuke
