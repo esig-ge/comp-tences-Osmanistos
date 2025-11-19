@@ -16,13 +16,14 @@ def product_details(request, pk):
     product = get_object_or_404(Product, pk=pk)
     reviews = Review.objects.filter(product=product)
 
+# Post generé par IA ChatGPT
     if request.method == 'POST':
         form = PostReview(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
             review.product = product
             review.save()
-            return redirect('product_details', pk=product.pk)  # éviter double POST
+            return redirect('product_details', pk=product.pk)  # éviter double POST redireciton !!!
     else:
         form = PostReview()
 
