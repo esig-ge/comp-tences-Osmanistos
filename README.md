@@ -6,6 +6,7 @@ Le crud est realiser sur la table de reviews
 
 RESSOURCE :
 Tout les détailles produits present sur ce site ont été récuperer depuis Digitec.ch et Galaxus.ch
+Pour le deployement et la creation du projet : https://tutorial.djangogirls.org/en/django/
 
 
 
