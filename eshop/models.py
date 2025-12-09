@@ -1,3 +1,5 @@
+from typing import Required
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -29,7 +31,8 @@ class Product(models.Model):
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user_mail = models.EmailField()
-    review = models.TextField()
+    # blank=true pour ne pas obliger une entrée
+    review = models.TextField(blank=True)
     publish_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

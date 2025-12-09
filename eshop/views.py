@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from django.http import JsonResponse
 from eshop.models import Product, Review
 from .forms import PostReview
 
@@ -52,3 +52,15 @@ def review_delete(request, pk):
     product_pk = review.product.pk
     review.delete()
     return redirect('product_details', pk=product_pk)
+
+
+def product_search(request):
+    query = request.GET.get("q", "")
+    if query:
+        resultats = Product.objects.filter(name__icontains=query)
+    else:
+        resultats = Product.objects.none()
+
+
+    return JsonResponse({"results": resultats})
+
