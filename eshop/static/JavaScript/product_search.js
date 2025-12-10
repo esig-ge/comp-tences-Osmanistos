@@ -10,12 +10,9 @@ document.getElementById("searchInput").addEventListener("input",  async function
         resultsContainer.removeChild(resultsContainer.firstChild);
     }
 
-    if (query.length < 2) {
+    if (query.length < 1) {
         const li = document.createElement("li");
-        li.textContent = "Tape au moins 2 caractères...";
-        li.style.padding = "8px";
-        li.style.color = "#999";
-        resultsContainer.appendChild(li);
+        resultsContainer.clear
         return;
     }
 
@@ -25,7 +22,7 @@ document.getElementById("searchInput").addEventListener("input",  async function
 
         const data = await response.json();
 
-        if (data.results.length === 0) {
+        if (data.results.length < 0) {
             const li = document.createElement("li");
             li.textContent = "Aucun produit trouvé";
             li.style.padding = "8px";
@@ -40,11 +37,6 @@ document.getElementById("searchInput").addEventListener("input",  async function
 
             a.href = `/get/${item.id}/`;
             a.textContent = `${item.name} — ${item.price} €`;
-            a.style.display = "block";
-            a.style.padding = "10px 12px";
-            a.style.textDecoration = "none";
-            a.style.color = "inherit";
-            a.style.borderBottom = "1px solid #eee";
 
             // Hover effect
             a.addEventListener("mouseenter", () => a.style.backgroundColor = "#f8f8f8");

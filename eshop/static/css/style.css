@@ -1,0 +1,33 @@
+#results {
+    list-style: none;      /* enlève les puces */
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#results li {
+    margin: 0;
+    border-bottom: 1px solid #eee;
+}
+
+#results li:last-child {
+    border-bottom: none;
+}
+
+#results a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #333;
+    transition: background 0.2s;
+}
+
+#results a:hover {
+    background-color: #f8f9fa;
+}
