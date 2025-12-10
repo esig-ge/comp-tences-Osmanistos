@@ -1,19 +1,64 @@
 
 // Generé par IA, modifier extensivement pour repondre a mes besoins
 document.getElementById("searchInput").addEventListener("input",  async function () {
+    const query = this.value.trim();
+    const resultsContainer = document.getElementById("results");
 
-    const q = this.value;
 
-    const response = await fetch('ajax_search') + encodeURIComponent(q);
-    console.log(response.json());
-    const data = await response.json();
+    // Vider proprement tous les enfants
+    while (resultsContainer.firstChild) {
+        resultsContainer.removeChild(resultsContainer.firstChild);
+    }
 
-    const list = document.getElementById("results");
-    list.innerHTML = "";
-
-    data.forEach(item => {
+    if (query.length < 2) {
         const li = document.createElement("li");
-        li.textContent = item.name;
-        list.appendChild(li);
-    });
+        li.textContent = "Tape au moins 2 caractères...";
+        li.style.padding = "8px";
+        li.style.color = "#999";
+        resultsContainer.appendChild(li);
+        return;
+    }
+
+    try {
+        const response = await fetch(`/ajax_search?q=${encodeURIComponent(query)}`);
+        if (!response.ok) throw new Error("Erreur serveur");
+
+        const data = await response.json();
+
+        if (data.results.length === 0) {
+            const li = document.createElement("li");
+            li.textContent = "Aucun produit trouvé";
+            li.style.padding = "8px";
+            li.style.color = "#999";
+            resultsContainer.appendChild(li);
+            return;
+        }
+
+        data.results.forEach(item => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+
+            a.href = `/get/${item.id}/`;
+            a.textContent = `${item.name} — ${item.price} €`;
+            a.style.display = "block";
+            a.style.padding = "10px 12px";
+            a.style.textDecoration = "none";
+            a.style.color = "inherit";
+            a.style.borderBottom = "1px solid #eee";
+
+            // Hover effect
+            a.addEventListener("mouseenter", () => a.style.backgroundColor = "#f8f8f8");
+            a.addEventListener("mouseleave", () => a.style.backgroundColor = "");
+
+            li.appendChild(a);
+            resultsContainer.appendChild(li);
+        });
+
+    } catch (err) {
+        console.error(err);
+        const li = document.createElement("li");
+        li.textContent = "Erreur de recherche";
+        li.style.color = "red";
+        resultsContainer.appendChild(li);
+    }
 });

@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from eshop.models import Product, Review
@@ -55,12 +57,19 @@ def review_delete(request, pk):
 
 
 def product_search(request):
-    query = request.GET.get("q", "")
-    if query:
-        resultats = Product.objects.filter(name__icontains=query)
-    else:
+    try:
+        query = request.GET.get("q", "")
+
+        if query:
+         resultats = Product.objects.filter(name__icontains=query).values(
+            'id', 'name', 'price')
+
+        else:
+            resultats = Product.objects.none()
+
+    except JSONDecodeError:
         resultats = Product.objects.none()
 
-
-    return JsonResponse({"results": resultats})
+    results_list = list(resultats)
+    return JsonResponse({"results": results_list})
 
