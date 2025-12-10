@@ -14,3 +14,7 @@ Pour le deployement et la creation du projet : https://tutorial.djangogirls.org/
 AIDE MEMOIRE :
 Forcer le remplacement du git sur pythonAnywhere : pa_autoconfigure_django.py --python=3.10 https://github.com/esig-ge/lien-github-cible --nuke
 Creation de nouvelle administrateur : python manage.py createsuperuser
+
+
+ERREUR :
+Soucis de déployement sur python.anywhere, j'ai rencontré une erreur d'import. Pour régler cela, il faut ajout la ligne "from typing_extensions import Required, NotRequired" tout en haut de models.py (cela va poser soucis en local : suffit de mettre ce bout en commentaire)
