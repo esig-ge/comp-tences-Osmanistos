@@ -1,29 +1,30 @@
-
-// Generé par IA, modifier extensivement pour repondre a mes besoins
-document.getElementById("searchInput").addEventListener("input",  async function () {
+document.getElementById("synced_input_button").addEventListener("click", function (event) {
 
 
-    const query = this.value.trim();
+    const query = document.getElementById("searchInput").value.trim();
     const resultsContainer = document.getElementById("results");
-
     resultsContainer.innerHTML = "";
 
     if (query.length < 1) {
-        const li = document.createElement("li");
-        resultsContainer.clear
         return;
     }
 
     try {
-        const response =  await fetch(`/ajax_search?q=${encodeURIComponent(query)}`);
-        if (!response.ok) throw new Error("Erreur serveur");
+        const xhr = new XMLHttpRequest();
+        xhr.open(
+            "GET", `/ajax_search?q=${encodeURIComponent(query)}`, false);
+        xhr.send(null);
 
-        const data = await response.json();
+        if (xhr.status !== 200) {
+            throw new Error("Erreur serveur");
+        }
+
+        const data = JSON.parse(xhr.responseText);
 
         if (data.results.length === 0) {
             const li = document.createElement("li");
             li.textContent = "Aucun produit trouvé";
-            li.style.color = "red";
+            li.style.color = "blue";
             resultsContainer.appendChild(li);
             return;
         }
@@ -35,7 +36,6 @@ document.getElementById("searchInput").addEventListener("input",  async function
             a.href = `/get/${item.id}/`;
             a.textContent = `${item.name} — ${item.price} €`;
 
-
             li.appendChild(a);
             resultsContainer.appendChild(li);
         });
@@ -44,8 +44,7 @@ document.getElementById("searchInput").addEventListener("input",  async function
         console.error(err);
         const li = document.createElement("li");
         li.textContent = "Erreur de recherche";
-        li.style.color = "red";
+        li.style.color = "blue";
         resultsContainer.appendChild(li);
     }
 });
-
