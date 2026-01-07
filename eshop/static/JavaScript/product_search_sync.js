@@ -12,7 +12,7 @@ document.getElementById("synced_input_button").addEventListener("click", functio
     try {
         const xhr = new XMLHttpRequest();
         xhr.open(
-            "GET", `/ajax_search?q=${encodeURIComponent(query)}`, false);
+            "GET", `/not_ajax_search?q=${encodeURIComponent(query)}`, false);
         xhr.send(null);
 
         if (xhr.status !== 200) {
