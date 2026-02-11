@@ -1,16 +1,19 @@
 from json import JSONDecodeError
-
+from rest_framework import serializers, viewsets
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from eshop.models import Product, Review
 from .forms import PostReview
-
 from django.shortcuts import render, get_object_or_404
 # Create your views here.
 
 
 
 def product_list(request):
+    products = Product.objects.all()
+    return render(request, "eshop/product_list.html", {'products': products})
+
+def product_list_react(request):
     products = Product.objects.all()
     return render(request, "eshop/product_list.html", {'products': products})
 
