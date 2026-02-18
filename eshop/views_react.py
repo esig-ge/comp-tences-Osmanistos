@@ -2,10 +2,12 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Product
+from rest_framework import serializers
 from .serializers import ProductSerializer
+from rest_framework import viewsets
 
-@api_view(['GET'])
-def product_list_api(request):
-    products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data)
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
