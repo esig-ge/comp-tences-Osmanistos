@@ -37,36 +37,119 @@
     transform: rotate(360deg);
   }
 }
-
-body {
+/* ===== GLOBAL PAGE ===== */
+.page {
+  min-height: 100vh;
+  padding: 40px;
+  background: linear-gradient(135deg, #eef2f3, #dfe9f3);
   font-family: Arial, sans-serif;
-  background: #f5f6fa;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 20px;
-}
-
-h1 {
+/* ===== HEADER ===== */
+.header {
   text-align: center;
+  margin-bottom: 40px;
 }
 
+.header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: #555;
+}
+
+/* ===== GRID ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
 }
 
+/* ===== CARD ===== */
 .card {
   background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c7be5;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  text-align: center;
+  background: #2c7be5;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.btn:hover {
+  background: #1a5fd0;
+}
+
+/* ===== LOADER ===== */
+.loader-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f9;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ddd;
+  border-top: 5px solid #2c7be5;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.teleport-btn {
+  width: 120px;
+  text-align: center;
+  padding: 10px 15px;
+  background: #2c7be5;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.teleport-btn:hover {
+  transform: scale(1.1);
+  background: #1a5fd0;
 }

@@ -11,7 +11,9 @@ router = DefaultRouter()
 router.register(r'Product', ProductViewSet)
 
 urlpatterns = [
+    # route pour envoyer les données a react
     path('', ProductViewSet.as_view({'get':'list'}), name='product_list'),
+    path('prod/<int:pk>/', ProductViewSet.as_view({'get':'retrieve'}), name='product_details'),
     path('get/<int:pk>/', views.product_details, name='product_details'),
     # Modifier un avis
     path('review/<int:pk>/edit/', views.review_edit, name='review_edit'),
